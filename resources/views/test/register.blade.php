@@ -78,9 +78,13 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
+                @error('unexpected')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
                 <div class="row">
                     <div class="col-8">
-                        <a href="{{route('login')}}">Already has an account?</a>
+                        <a href="{{ route('login') }}">Already has an account?</a>
                     </div>
                     <div class="col-4">
                         <button type="submit" class="btn btn-primary btn-block">Sign Up</button>

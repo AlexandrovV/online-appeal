@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,13 +44,17 @@ class LoginController extends Controller
             $user->password = bcrypt($credentials['password']);
             $user->save();
 
+            $roleStudent = Role::where('slug', 'student')->first();
+            $user->assignRole($roleStudent);
+
             if (Auth::attempt($credentials)) {
-                redirect('/');
+                return redirect('/');
             } else {
-                redirect('/login');
+                return redirect('/login');
             }
         } catch (\Exception $e) {
             Log::error($e->getMessage());
+            return back()->withErrors(['unexpected' => 'Unexpected error occured ' . $e->getMessage()]);
         }
     }
 
