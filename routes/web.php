@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\TestController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [IndexController::class, 'index'])->middleware('auth')->name('index');
 
-Route::prefix('department')->group(
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
+
+Route::get('/register', [LoginController::class, 'register'])->name('login');
+Route::post('/sign-up', [LoginController::class, 'signUp'])->name('sign-up');
+
+Route::group(['prefix' => 'department', 'middleware' => ['auth', 'acl'], 'is' => 'admin|dept'],
     function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('department-all');
         Route::get('/show/{id}', [DepartmentController::class, 'show'])->name('department-get');
@@ -32,6 +38,7 @@ Route::prefix('department')->group(
         Route::post('/update/{id}', [DepartmentController::class, 'update'])->name('department-update');
     }
 );
+
 /*
  * Test Controllers
  */

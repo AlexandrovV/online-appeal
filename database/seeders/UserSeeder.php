@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Hashing\BcryptHasher;
 
 class UserSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class UserSeeder extends Seeder
         $admin = new User();
         $admin->name = 'admin';
         $admin->email = 'admin@example.com';
-        $admin->password = 'pass';
+        $admin->password = bcrypt('pass');
         $admin->save();
 
         $admin->assignRole($adminRole);
@@ -29,7 +30,7 @@ class UserSeeder extends Seeder
         $manager = new User();
         $manager->name = 'manager';
         $manager->email = 'manager@example.com';
-        $manager->password = 'pass';
+        $manager->password = bcrypt('pass');
         $manager->save();
 
         $manager->assignRole($managerRole);
@@ -39,7 +40,7 @@ class UserSeeder extends Seeder
         $student = new User();
         $student->name = 'student';
         $student->email = 'student@example.com';
-        $student->password = 'pass';
+        $student->password = bcrypt('pass');
         $student->save();
 
         $student->assignRole($studentRole);
@@ -49,7 +50,7 @@ class UserSeeder extends Seeder
         $department = new User();
         $department->name = 'dept';
         $department->email = 'dept@example.com';
-        $department->password = 'pass';
+        $department->password = bcrypt('pass');
         $department->save();
 
         $department->assignRole($departmentRole);
