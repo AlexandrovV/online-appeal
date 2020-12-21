@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Создать новый департамент</h1>
+                    <h1>Изменить текущий департамент</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -39,7 +39,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Создать</button>
+                                <button type="submit" class="btn btn-primary">Обновить</button>
                             </div>
                         </form>
                     </div>

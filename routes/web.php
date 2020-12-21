@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,18 @@ Route::group(['prefix' => 'department', 'middleware' => ['auth', 'acl'], 'is' =>
         Route::post('/store', [DepartmentController::class, 'store'])->name('department-store');
         Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('department-edit');
         Route::post('/update/', [DepartmentController::class, 'update'])->name('department-update');
+    }
+);
+
+Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'acl'], 'is' => 'admin|dept'],
+    function () {
+        Route::get('/', [TeacherController::class, 'index'])->name('teacher-all');
+        Route::get('/show/{id}', [TeacherController::class, 'show'])->name('teacher-get');
+        Route::get('/delete/{id}', [TeacherController::class, 'destroy'])->name('teacher-destroy');
+        Route::get('/create', [TeacherController::class, 'create'])->name('teacher-create');
+        Route::post('/store', [TeacherController::class, 'store'])->name('teacher-store');
+        Route::get('/edit/{id}', [TeacherController::class, 'edit'])->name('teacher-edit');
+        Route::post('/update/', [TeacherController::class, 'update'])->name('teacher-update');
     }
 );
 

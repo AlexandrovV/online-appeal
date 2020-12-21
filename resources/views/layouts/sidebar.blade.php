@@ -111,14 +111,14 @@
                 <li class="nav-header">ХРАНИЛИЩЕ</li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('department-all')}}" class="nav-link">
                         <i class="nav-icon fas fa-university"></i>
                         <p>Департаменты</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('teacher-all')}}" class="nav-link">
                         <i class="nav-icon fas fa-graduation-cap"></i>
                         <p>Учителя</p>
                     </a>

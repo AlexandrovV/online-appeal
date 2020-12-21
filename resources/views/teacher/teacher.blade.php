@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{$department->id}} - {{$department -> name}}</h1>
+                    <h1>{{$teacher->id}} - {{$teacher -> last_name}} {{$teacher -> first_name}} {{$teacher -> middle_name}}</h1>
                 </div>
             </div>
         </div>
@@ -15,10 +15,10 @@
     <section class="content">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Кафедра {{$department -> name}}</h3>
+                <h3 class="card-title">Учитель # {{$teacher -> id}}</h3>
 
                 <div class="card-tools">
-                    <a href="{{route('department-all')}}" class="btn btn-tool">
+                    <a href="{{route('teacher-all')}}" class="btn btn-tool">
                         <i class="fas fa-arrow-circle-left"></i></a>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fas fa-minus"></i></button>
@@ -31,15 +31,17 @@
                             <div class="col-12">
                                 <div class="info-box bg-light">
                                     <div class="info-box-content">
-                                        <h4 class="info-box-text text-muted">ID в системе: {{$department -> id}}</h4>
-                                        <p class="info-box-text text-muted">Название кафедры: {{$department -> name}}</p>
-                                        <p class="info-box-text text-muted">Тип кафедры: {{$department -> department_type}}</p>
-                                        <p class="info-box-text text-muted">Дата создания: {{$department -> created_at}}</p>
-                                        <p class="info-box-text text-muted">Дата изменения: {{$department -> updated_at}}</p>
+                                        <h4 class="info-box-text text-muted">ID в системе: {{$teacher -> id}}</h4>
+                                        <p class="info-box-text text-muted">Имя учителя: {{$teacher -> first_name}}</p>
+                                        <p class="info-box-text text-muted">Фамилия учителя: {{$teacher -> last_name}}</p>
+                                        <p class="info-box-text text-muted">Отчество учителя: {{$teacher -> last_name}}</p>
+                                        <p class="info-box-text text-muted">Принадлежит кафедре: {{$teacher -> department -> name}}</p>
+                                        <p class="info-box-text text-muted">Дата создания: {{$teacher -> created_at}}</p>
+                                        <p class="info-box-text text-muted">Дата изменения: {{$teacher -> updated_at}}</p>
                                         <div class="info-box-more">
                                             <span class="text-muted">Действия: </span>
-                                            <a href="{{route('department-edit', ['id' => $department->id])}}" class="m-2 btn btn-outline-info">Изменить</a>
-                                            <a href="{{route('department-destroy', ['id' => $department->id])}}" class="m-2 btn btn-outline-danger">Удалить</a>
+                                            <a href="{{route('teacher-edit', ['id' => $teacher->id])}}" class="m-2 btn btn-outline-info">Изменить</a>
+                                            <a href="{{route('teacher-destroy', ['id' => $teacher->id])}}" class="m-2 btn btn-outline-danger">Удалить</a>
                                         </div>
 
                                     </div>
