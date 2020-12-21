@@ -13,17 +13,17 @@ class DepartmentRepository
         $department = new Department();
         $department -> name = $name;
         $department -> department_type = $departmentType;
-        Department::created($department);
-        Log::info("Department added:", $department -> name);
+        $department->save();
+        Log::info("Department added:", ['name' => $department -> name]);
     }
 
-    public function update($id, $department) {
+    public function update($id, $name, $department_type) {
         try {
-            Department::query()->where('id', $id)->update($department);
+            Department::query()->where('id', $id)->update(['name'=> $name, 'department_type' => $department_type]);
+            Log::info("Department updated: ", ['name' => $name,'id' => $id]);
             return $id;
         } catch (\Exception $e) {
-            echo $e->getMessage();
-            throw $e;
+            Log::error($e->getMessage());
         }
     }
 
@@ -36,7 +36,8 @@ class DepartmentRepository
     }
 
     public function deleteById($id) {
-        return Department::destroy($id);
+        Department::destroy($id);
+        Log::info("Department deleted: ", ['id' => $id]);
+        return $id;
     }
-
 }

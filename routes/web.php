@@ -29,7 +29,7 @@ Route::prefix('department')->group(
         Route::get('/create', [DepartmentController::class, 'create'])->name('department-create');
         Route::post('/store', [DepartmentController::class, 'store'])->name('department-store');
         Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('department-edit');
-        Route::post('/update/{id}', [DepartmentController::class, 'update'])->name('department-update');
+        Route::post('/update/', [DepartmentController::class, 'update'])->name('department-update');
     }
 );
 /*
