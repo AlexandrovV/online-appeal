@@ -10,4 +10,14 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+//    protected $service;
+//    protected $repository;
+//
+//    public function __construct(SourceService $sourceService, SourceRepository $sourceRepository) {
+//        $this -> service = $sourceService;
+//        $this -> repository = $sourceRepository;
+//    }
+
+
 }
