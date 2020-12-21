@@ -29,6 +29,8 @@ Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('au
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/sign-up', [LoginController::class, 'signUp'])->name('sign-up');
 
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::group(['prefix' => 'department', 'middleware' => ['auth', 'acl'], 'is' => 'admin|dept'],
     function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('department-all');

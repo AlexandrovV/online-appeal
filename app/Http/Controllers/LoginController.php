@@ -12,12 +12,20 @@ class LoginController extends Controller
 {
     public function login()
     {
-        return view('test.login');
+        return view('auth.login');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return view('auth.login');
     }
 
     public function register()
     {
-        return view('test.register');
+        return view('auth.register');
     }
 
     public function signUp(Request $request)
