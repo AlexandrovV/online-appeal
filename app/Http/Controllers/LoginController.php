@@ -30,26 +30,30 @@ class LoginController extends Controller
 
     public function signUp(Request $request)
     {
-        $credentials = $request->only('name', 'email', 'password', 'passwordConfirm');
+        $credentials = $request->only('email', 'password');
 
-        if ($credentials['name'] == null) return back()->withErrors([
-            'name' => 'Name must be specified',
+        if ($request['departmentId'] == null) return back()->withErrors([
+            'unexpected' => 'Укажите кафедру',
         ]);
-        if ($credentials['email'] == null) return back()->withErrors([
-            'email' => 'Email must be specified',
+        if ($request['name'] == null) return back()->withErrors([
+            'name' => 'Укажите ФИО',
         ]);
-        if ($credentials['password'] == null) return back()->withErrors([
-            'password' => 'Password must be specified',
+        if ($request['email'] == null) return back()->withErrors([
+            'email' => 'Укажите E-mail',
         ]);
-        if ($credentials['password'] != $credentials['passwordConfirm']) return back()->withErrors([
-            'password-confirm' => 'Password confirmation failed' ,
+        if ($request['password'] == null) return back()->withErrors([
+            'password' => 'Укажите пароль',
+        ]);
+        if ($request['password'] != $request['passwordConfirm']) return back()->withErrors([
+            'password-confirm' => 'Пароли не совпадают' ,
         ]);
 
         try {
-            $user = new User($credentials);
-            $user->name = $credentials['name'];
-            $user->email = $credentials['email'];
-            $user->password = bcrypt($credentials['password']);
+            $user = new User();
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+            $user->password = bcrypt($request['password']);
+            $user->department_id = $request['departmentId'];
             $user->save();
 
             $roleStudent = Role::where('slug', 'student')->first();

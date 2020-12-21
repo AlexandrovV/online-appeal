@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Hashing\BcryptHasher;
 
 class UserSeeder extends Seeder
 {
@@ -16,11 +16,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $department = new Department();
+        $department->name = 'Компьютерные и информационные технологии';
+        $department->department_type = 'IT';
+        $departmentId = $department->save();
+
         $adminRole = Role::where('slug', 'admin')->first();
         $admin = new User();
         $admin->name = 'admin';
         $admin->email = 'admin@example.com';
         $admin->password = bcrypt('pass');
+        $admin->department_id = $departmentId;
         $admin->save();
 
         $admin->assignRole($adminRole);
@@ -31,6 +37,7 @@ class UserSeeder extends Seeder
         $manager->name = 'manager';
         $manager->email = 'manager@example.com';
         $manager->password = bcrypt('pass');
+        $manager->department_id = $departmentId;
         $manager->save();
 
         $manager->assignRole($managerRole);
@@ -41,6 +48,7 @@ class UserSeeder extends Seeder
         $student->name = 'student';
         $student->email = 'student@example.com';
         $student->password = bcrypt('pass');
+        $student->department_id = $departmentId;
         $student->save();
 
         $student->assignRole($studentRole);
@@ -51,6 +59,7 @@ class UserSeeder extends Seeder
         $department->name = 'dept';
         $department->email = 'dept@example.com';
         $department->password = bcrypt('pass');
+        $department->department_id = $departmentId;
         $department->save();
 
         $department->assignRole($departmentRole);

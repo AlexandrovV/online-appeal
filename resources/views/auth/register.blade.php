@@ -30,8 +30,18 @@
 
             <form action="{{route('sign-up')}}" method="post">
                 @csrf
+                <label for="selectDep">Кафедра</label>
+                <select id="selectDep" name="departmentId" class="form-control">
+                    @foreach(App\Models\Department::all() as $key => $department)
+                    <option value="{{$department->id}}">{{$department->name}}</option>
+                    @endforeach
+                </select>
+
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Name" name="name">
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="ФИО" name="name">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -43,7 +53,7 @@
                 @enderror
 
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email" name="email">
+                    <input type="email" class="form-control" placeholder="E-mail" name="email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -55,7 +65,7 @@
                 @enderror
 
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <input type="password" class="form-control" placeholder="Пароль" name="password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -67,7 +77,7 @@
                 @enderror
 
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password confirm" name="passwordConfirm">
+                    <input type="password" class="form-control" placeholder="Подтверждение пароля" name="passwordConfirm">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -83,11 +93,11 @@
                 @enderror
 
                 <div class="row">
-                    <div class="col-8">
-                        <a href="{{ route('login') }}">Already has an account?</a>
+                    <div class="col-6">
+                        <a href="{{ route('login') }}">Уже есть аккаунт?</a>
                     </div>
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary btn-block">Регистрация</button>
                     </div>
                 </div>
             </form>

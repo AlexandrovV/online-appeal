@@ -44,10 +44,10 @@ class TeacherController extends Controller
     {
         try {
             $this->teacherRepository->save($request->first_name, $request->last_name, $request->middle_name, $request->department_id);
-            return redirect()->route('department-all')->with('status', 'success');
+            return redirect()->route('teacher-all')->with('status', 'success');
         } catch (\Exception $exception) {
             Log::error($exception -> getMessage());
-            return redirect()->route('department-all')->with('status', 'fail');
+            return redirect()->route('teacher-all')->with('status', 'fail');
         }
     }
 

@@ -21,6 +21,7 @@ class CreateAppealsTable extends Migration
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('student_id');
             $table->foreign('subject_id')
                 ->references('id')
                 ->on('subjects');
@@ -30,8 +31,10 @@ class CreateAppealsTable extends Migration
             $table->foreign('department_id')
                 ->references('id')
                 ->on('departments');
-            $table->bigInteger('student_id');
-            $table->bigInteger('verifier_id',);
+            $table->foreign('student_id')
+                ->references('id')
+                ->on('users');
+            $table->bigInteger('verifier_id')->nullable();
 
         });
     }

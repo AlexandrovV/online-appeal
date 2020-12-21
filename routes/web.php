@@ -7,6 +7,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use \App\Http\Controllers\AppealController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,6 +75,9 @@ Route::group(['prefix' => 'roles', 'middleware' => ['auth', 'acl'], 'is' => 'adm
         Route::post('/sync', [RoleController::class, 'syncRoles'])->name('sync-roles');
     }
 );
+
+Route::get('/appeal/form', [AppealController::class, 'form'])->name('appeal-form');
+Route::post('appeal-create', [AppealController::class, 'create'])->name('appeal-create');
 
 /*
  * Test Controllers
