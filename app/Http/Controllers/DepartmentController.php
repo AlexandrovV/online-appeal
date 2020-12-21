@@ -42,15 +42,11 @@ class DepartmentController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+        $department = $this->repository->findById($id);
+        return view('department.department', compact('department'));
     }
 
     /**

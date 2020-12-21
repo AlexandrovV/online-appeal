@@ -23,7 +23,13 @@ Route::get('/', function () {
 
 Route::prefix('department')->group(
     function () {
-        Route::get('/', [DepartmentController::class, 'index']);
+        Route::get('/', [DepartmentController::class, 'index'])->name('department-all');
+        Route::get('/show/{id}', [DepartmentController::class, 'show'])->name('department-get');
+        Route::get('/delete/{id}', [DepartmentController::class, 'destroy'])->name('department-destroy');
+        Route::get('/create', [DepartmentController::class, 'create'])->name('department-create');
+        Route::post('/store', [DepartmentController::class, 'store'])->name('department-store');
+        Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('department-edit');
+        Route::post('/update/{id}', [DepartmentController::class, 'update'])->name('department-update');
     }
 );
 /*
