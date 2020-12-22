@@ -4,6 +4,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\NotificationLogController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
@@ -79,6 +80,12 @@ Route::group(['prefix' => 'roles', 'middleware' => ['auth', 'acl'], 'is' => 'adm
 Route::get('/appeal/form', [AppealController::class, 'form'])->name('appeal-form');
 Route::post('appeal-create', [AppealController::class, 'create'])->name('appeal-create');
 Route::get('/appeal/get/{id}', [AppealController::class, 'sendConfirmedAppeal'])->name('appeal-browser');
+
+Route::group(['prefix' => 'notification', 'middleware' => ['auth', 'acl'], 'is' => 'admin'],
+    function () {
+        Route::get('/', [NotificationLogController::class, 'index'])->name('notification-all');
+    }
+);
 /*
  * Test Controllers
  */
