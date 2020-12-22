@@ -78,7 +78,7 @@ Route::group(['prefix' => 'roles', 'middleware' => ['auth', 'acl'], 'is' => 'adm
 
 Route::get('/appeal/form', [AppealController::class, 'form'])->name('appeal-form');
 Route::post('appeal-create', [AppealController::class, 'create'])->name('appeal-create');
-
+Route::get('/appeal/get/{id}', [AppealController::class, 'sendConfirmedAppeal'])->name('appeal-browser');
 /*
  * Test Controllers
  */

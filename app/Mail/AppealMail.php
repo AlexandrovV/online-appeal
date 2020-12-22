@@ -33,12 +33,12 @@ class AppealMail extends Mailable
     public function build()
     {
         return $this->view('mails.appeal_success')
-                    ->attach(public_path() . '/test.pdf', [
+                    ->attach(public_path() . '/appeal-'. $this->data->id . '.pdf', [
                         'as' => 'Аппеляция-.pdf',
                         'mime' => 'application/pdf'
                     ])
                     ->with([
-                        'name' => $this -> data -> user -> name,
+                        'name' => $this -> data -> student -> name,
                         'id' => $this -> data -> id
                     ]);
 
