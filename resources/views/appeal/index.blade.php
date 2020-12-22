@@ -70,7 +70,7 @@
                             @endif
 
                             @if ($appeal->status == 'accepted')
-                                <a href="{{route('appeal-browser', ['id' => $appeal->id])}}" class="btn btn-outline-info">Открыть PDF</a>
+                                <a href="{{route('appeal-browser', ['id' => $appeal->id])}}" target="_blank" class="btn btn-outline-info">Открыть PDF</a>
                             @endif
                         </td>
                     </tr>

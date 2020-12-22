@@ -115,8 +115,8 @@ class AppealController extends Controller
     }
 
     public function getAppealInBrowser($id) {
-        $appeal = Appeal::query()->findOrFail(1);
-        $doc =  $this->generateService->generateAppealInFollowingFormat($appeal, 'F');
+        $appeal = Appeal::query()->findOrFail($id);
+        $doc =  $this->generateService->generateAppealInFollowingFormat($appeal, 'I');
     }
 
     private function sendConfirmedAppeal($id) {
