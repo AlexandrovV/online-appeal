@@ -143,7 +143,7 @@
                 <li class="nav-header">ПОЛЬЗОВАТЕЛИ</li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('roles-all')}}" class="nav-link">
                         <i class="nav-icon fas fa-user-tag"></i>
                         <p>Изменить роль</p>
                     </a>
