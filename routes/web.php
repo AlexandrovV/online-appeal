@@ -76,8 +76,33 @@ Route::group(['prefix' => 'roles', 'middleware' => ['auth', 'acl'], 'is' => 'adm
     }
 );
 
-Route::get('/appeal/form', [AppealController::class, 'form'])->name('appeal-form');
-Route::post('appeal-create', [AppealController::class, 'create'])->name('appeal-create');
+Route::group(['prefix' => '/stud/appeals', 'middleware' => ['auth', 'acl'], 'is' => 'student'],
+    function () {
+        Route::get('/', [AppealController::class, 'studentAppeals'])->name('student-appeals');
+        Route::get('/{status}', [AppealController::class, 'studentStatusAppeals'])->name('student-status-appeals');
+        Route::get('/form', [AppealController::class, 'form'])->name('appeal-form');
+        Route::post('/create', [AppealController::class, 'create'])->name('appeal-create');
+    }
+);
+
+Route::group(['prefix' => '/dept/appeals', 'middleware' => ['auth', 'acl'], 'is' => 'dept|admin'],
+    function () {
+        Route::get('/', [AppealController::class, 'departmentAppeals'])->name('department-appeals');
+        Route::get('/{status}', [AppealController::class, 'departmentStatusAppeals'])->name('department-status-appeals');
+        Route::get('/approve/{id}', [AppealController::class, 'approve'])->name('approve-appeal')->middleware(['auth', 'acl']);
+    }
+);
+
+Route::group(['prefix' => '/manager/appeals', 'middleware' => ['auth', 'acl'], 'is' => 'manager|admin'],
+    function () {
+        Route::get('/', [AppealController::class, 'managerAppeals'])->name('manager-appeals');
+        Route::get('/{status}', [AppealController::class, 'managerStatusAppeals'])->name('manager-status-appeals');
+        Route::get('/accept/{id}', [AppealController::class, 'accept'])->name('accept-appeal');
+    }
+);
+
+Route::get('/appeal/cancel/{id}', [AppealController::class, 'cancel'])->name('cancel-appeal')->middleware('auth');
+
 
 /*
  * Test Controllers

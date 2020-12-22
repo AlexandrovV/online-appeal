@@ -28,7 +28,7 @@
                     <label for="selectTeacher">Учитель</label>
                     <select id="selectTeacher" name="teacherId">
                         @foreach(App\Models\Teacher::all() as $key => $teacher)
-                            <option value="{{$teacher->id}}">{{$teacher->last_name . $teacher->first_name . $teacher->middle_name}}</option>
+                            <option value="{{$teacher->id}}">{{$teacher->last_name . ' ' . $teacher->first_name . ' ' . $teacher->middle_name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -40,7 +40,7 @@
             </div>
 
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Изменить</button>
+                <button type="submit" class="btn btn-primary">Создать</button>
             </div>
         </form>
     <!-- /.login-card-body -->

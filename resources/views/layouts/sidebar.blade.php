@@ -17,7 +17,7 @@
                 <img src="{{asset('/img/avatardefault.png')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">User User</a>
+                <a href="#" class="d-block">{{ Auth::user()->email }}</a>
             </div>
         </div>
 
@@ -26,7 +26,13 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
+                @role('student')
                 <li class="nav-header">&nbsp;&nbsp;&nbsp;ЗАЯВКИ</li>
+
+                <a href="{{ route('appeal-form') }}" class="nav-link">
+                    <i class="far fa-edit nav-icon"></i>
+                    <p>Создать заявку</p>
+                </a>
 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -37,32 +43,34 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../../index.html" class="nav-link">
+                            <a href="{{ route('student-status-appeals', ['status' => 'waiting']) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>На рассмотрении</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../index2.html" class="nav-link">
+                            <a href="{{ route('student-status-appeals', ['status' => 'accepted']) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Подтверждены</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
+                            <a href="{{ route('student-status-appeals', ['status' => 'cancelled']) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Отменены</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
+                            <a href="{{ route('student-appeals') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Все</p>
                             </a>
                         </li>
                     </ul>
                 </li>
+                @endrole
 
+                @role('admin|manager|dept')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fab fa-stack-overflow"></i>
@@ -72,32 +80,66 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../../index.html" class="nav-link">
+                            @role('admin|manager')
+                            <a href="{{ route('manager-status-appeals', ['status' => 'waiting']) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Готовы к рассмотрению</p>
                             </a>
+                            @endrole
+                            @role('dept')
+                            <a href="{{ route('department-status-appeals', ['status' => 'waiting']) }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Готовы к рассмотрению</p>
+                            </a>
+                            @endrole
                         </li>
                         <li class="nav-item">
-                            <a href="../../index2.html" class="nav-link">
+                            @role('admin|manager')
+                            <a href="{{ route('manager-status-appeals', ['status' => 'accepted']) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Подтверждены</p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
+                            @endrole
+                            @role('dept')
+                            <a href="{{ route('department-status-appeals', ['status' => 'accepted']) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Отменены</p>
+                                <p>Подтверждены</p>
                             </a>
+                            @endrole
                         </li>
                         <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
+                            @role('admin|manager')
+                                <a href="{{ route('manager-status-appeals', ['status' => 'cancelled']) }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Отменены</p>
+                                </a>
+                            @endrole
+                            @role('dept')
+                                <a href="{{ route('department-status-appeals', ['status' => 'cancelled']) }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Отменены</p>
+                                </a>
+                            @endrole
+                        </li>
+                        <li class="nav-item">
+                            @role('admin|manager')
+                                <a href="{{ route('manager-appeals') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Все</p>
+                                </a>
+                            @endrole
+                            @role('dept')
+                            <a href="{{ route('department-appeals') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Все</p>
                             </a>
+                            @endrole
                         </li>
                     </ul>
                 </li>
+                @endrole
 
+                @role('admin')
                 <li class="nav-header">ПОЛЬЗОВАТЕЛИ</li>
 
                 <li class="nav-item">
@@ -130,7 +172,9 @@
                         <p>Предметы</p>
                     </a>
                 </li>
+                @endrole
 
+                @role('admin|manager|dept')
                 <li class="nav-header">ЛОГИРОВАНИЕ</li>
 
                 <li class="nav-item">
@@ -139,6 +183,7 @@
                         <p>Отправленные письма</p>
                     </a>
                 </li>
+                @endrole
 
                 <li class="nav-header">СИСТЕМА</li>
                 <li class="nav-item">

@@ -35,4 +35,74 @@ class AppealController extends Controller
             return redirect()->route('appeal-form')->with('status', 'fail');
         }
     }
+
+    public function studentAppeals() {
+        $user = Auth::user();
+        $appeals = $this->repository->studentsAppeals($user->id, null);
+        $statuses = ['created'=>'Создана','waiting'=>'На рассмотрении','accepted'=>'Подтверждена','cancelled'=>'Отменена'];
+        return view('appeal.index', compact('appeals', 'statuses'));
+    }
+
+    public function studentStatusAppeals($status) {
+        $user = Auth::user();
+        $appeals = $this->repository->studentsAppeals($user->id, $status);
+        $statuses = ['created'=>'Создана','waiting'=>'На рассмотрении','accepted'=>'Подтверждена','cancelled'=>'Отменена'];
+        return view('appeal.index', compact('appeals', 'statuses'));
+    }
+
+    public function managerAppeals() {
+        $appeals = $this->repository->managerAppeals(null);
+        $statuses = ['created'=>'Создана','waiting'=>'На рассмотрении','accepted'=>'Подтверждена','cancelled'=>'Отменена'];
+        return view('appeal.index', compact('appeals', 'statuses'));
+    }
+
+    public function managerStatusAppeals($status) {
+        $appeals = $this->repository->managerAppeals($status);
+        $statuses = ['created'=>'Создана','waiting'=>'На рассмотрении','accepted'=>'Подтверждена','cancelled'=>'Отменена'];
+        return view('appeal.index', compact('appeals', 'statuses'));
+    }
+
+    public function departmentAppeals() {
+        $user = Auth::user();
+        $appeals = $this->repository->departmentAppeals($user->department_id, null);
+        $statuses = ['created'=>'Создана','waiting'=>'На рассмотрении','accepted'=>'Подтверждена','cancelled'=>'Отменена'];
+        return view('appeal.index', compact('appeals', 'statuses'));
+    }
+
+    public function departmentStatusAppeals($status) {
+        $user = Auth::user();
+        $appeals = $this->repository->departmentAppeals($user->department_id, $status);
+        $statuses = ['created'=>'Создана','waiting'=>'На рассмотрении','accepted'=>'Подтверждена','cancelled'=>'Отменена'];
+        return view('appeal.index', compact('appeals', 'statuses'));
+    }
+
+    public function accept($id) {
+        try {
+            $this->repository->accept($id);
+            return redirect()->back()->with('status', 'updated');
+        } catch (\Exception $exception) {
+            Log::error($exception -> getMessage());
+            return redirect()->back()->with('status', 'fail');
+        }
+    }
+
+    public function approve($id) {
+        try {
+            $this->repository->approve($id);
+            return redirect()->back()->with('status', 'updated');
+        } catch (\Exception $exception) {
+            Log::error($exception -> getMessage());
+            return redirect()->route('appeal-form')->with('status', 'fail');
+        }
+    }
+
+    public function cancel($id) {
+        try {
+            $this->repository->cancel($id);
+            return redirect()->back()->with('status', 'updated');
+        } catch (\Exception $exception) {
+            Log::error($exception -> getMessage());
+            return redirect()->back()->with('status', 'fail');
+        }
+    }
 }
