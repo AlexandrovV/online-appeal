@@ -33,7 +33,7 @@ class MyController extends Controller
         $test->name = 'NAME';
         $test->my_enum = 'a';
         $test->my_int = 2;
-        foreach (['danila@internet.ru', 'deathhunter222@gmail.com'] as $recipient) {
+        foreach (['deathhunter222@gmail.com'] as $recipient) {
             Mail::to($recipient)->send(new TestMail($test));
         }
 
