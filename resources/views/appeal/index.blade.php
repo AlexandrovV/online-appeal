@@ -68,6 +68,10 @@
                             @if ($appeal->status != 'cancelled' && $appeal->status != 'accepted')
                                 <a href="{{route('cancel-appeal', ['id' => $appeal->id])}}" class="btn btn-outline-danger">Отменить</a>
                             @endif
+
+                            @if ($appeal->status == 'accepted')
+                                <a href="{{route('appeal-browser', ['id' => $appeal->id])}}" class="btn btn-outline-info">Открыть PDF</a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

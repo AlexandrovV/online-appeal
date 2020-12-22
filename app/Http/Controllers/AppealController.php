@@ -96,6 +96,7 @@ class AppealController extends Controller
     public function approve($id) {
         try {
             $this->repository->approve($id);
+            $this->sendConfirmedAppeal($id);
             return redirect()->back()->with('status', 'updated');
         } catch (\Exception $exception) {
             Log::error($exception -> getMessage());
@@ -118,7 +119,7 @@ class AppealController extends Controller
         $doc =  $this->generateService->generateAppealInFollowingFormat($appeal, 'F');
     }
 
-    public function sendConfirmedAppeal($id) {
+    private function sendConfirmedAppeal($id) {
         $email = Auth::user()->email;
         $appeal = Appeal::query()->findOrFail(1);
         foreach ([$email] as $recipient) {

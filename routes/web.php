@@ -81,7 +81,7 @@ Route::group(['prefix' => '/stud/appeals', 'middleware' => ['auth', 'acl'], 'is'
     function () {
         Route::get('/', [AppealController::class, 'studentAppeals'])->name('student-appeals');
         Route::get('/{status}', [AppealController::class, 'studentStatusAppeals'])->name('student-status-appeals');
-        Route::get('/form', [AppealController::class, 'form'])->name('appeal-form');
+        Route::get('/form/new', [AppealController::class, 'form'])->name('appeal-form');
         Route::post('/create', [AppealController::class, 'create'])->name('appeal-create');
     }
 );
@@ -104,7 +104,7 @@ Route::group(['prefix' => '/manager/appeals', 'middleware' => ['auth', 'acl'], '
 
 Route::get('/appeal/cancel/{id}', [AppealController::class, 'cancel'])->name('cancel-appeal')->middleware('auth');
 
-Route::get('/appeal/get/{id}', [AppealController::class, 'sendConfirmedAppeal'])->name('appeal-browser');
+Route::get('/appeal/get/{id}', [AppealController::class, 'getAppealInBrowser'])->name('appeal-browser');
 
 Route::group(['prefix' => 'notification', 'middleware' => ['auth', 'acl'], 'is' => 'admin'],
     function () {
