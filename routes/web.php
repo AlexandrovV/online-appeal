@@ -4,6 +4,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\NotificationLogController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
@@ -103,7 +104,13 @@ Route::group(['prefix' => '/manager/appeals', 'middleware' => ['auth', 'acl'], '
 
 Route::get('/appeal/cancel/{id}', [AppealController::class, 'cancel'])->name('cancel-appeal')->middleware('auth');
 
+Route::get('/appeal/get/{id}', [AppealController::class, 'sendConfirmedAppeal'])->name('appeal-browser');
 
+Route::group(['prefix' => 'notification', 'middleware' => ['auth', 'acl'], 'is' => 'admin'],
+    function () {
+        Route::get('/', [NotificationLogController::class, 'index'])->name('notification-all');
+    }
+);
 /*
  * Test Controllers
  */
