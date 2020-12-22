@@ -15,7 +15,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "kodeine/laravel-acl": "^2.0",
         "laravel/framework": "^8.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "mpdf/mpdf": "^8.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
