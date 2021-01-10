@@ -174,13 +174,24 @@
                 </li>
                 @endrole
 
-                @role('admin|manager|dept')
+                @role('admin')
                 <li class="nav-header">ЛОГИРОВАНИЕ</li>
 
                 <li class="nav-item">
                     <a href="{{route('notification-all')}}" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>Отправленные письма</p>
+                    </a>
+                </li>
+                @endrole
+
+                @role('admin')
+                <li class="nav-header">СТАТИСТИКА</li>
+
+                <li class="nav-item">
+                    <a href="{{route('stats-index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>Статистика заявок</p>
                     </a>
                 </li>
                 @endrole
