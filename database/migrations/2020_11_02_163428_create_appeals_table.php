@@ -35,7 +35,6 @@ class CreateAppealsTable extends Migration
                 ->references('id')
                 ->on('users');
             $table->bigInteger('verifier_id')->nullable();
-
         });
     }
 

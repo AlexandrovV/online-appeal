@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Appeal extends Model
 {
@@ -23,5 +24,9 @@ class Appeal extends Model
 
     public function student() {
         return $this->belongsTo(User::class);
+    }
+
+    public function approvals() {
+        return $this->hasMany(Approval::class);
     }
 }

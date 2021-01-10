@@ -9,7 +9,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AppealMail extends Mailable
+class ProtocolMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,15 +32,14 @@ class AppealMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.appeal_success')
-                    ->attach(public_path() . '/appeal-'. $this->data->id . '.pdf', [
-                        'as' => 'Аппеляция-.pdf',
-                        'mime' => 'application/pdf'
-                    ])
-                    ->with([
-                        'name' => $this -> data -> student -> name,
-                        'id' => $this -> data -> id
-                    ]);
+        return $this->view('mails.appeal_accepted')
+            ->attach(public_path() . '/protocol-'. $this->data->id . '.pdf', [
+                'as' => 'Протокол-.pdf',
+                'mime' => 'application/pdf'
+            ])
+            ->with([
+                'id' => $this -> data -> id
+            ]);
 
 
     }

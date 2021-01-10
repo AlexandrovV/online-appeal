@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NotificationLogController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use \App\Http\Controllers\AppealController;
@@ -90,7 +91,7 @@ Route::group(['prefix' => '/dept/appeals', 'middleware' => ['auth', 'acl'], 'is'
     function () {
         Route::get('/', [AppealController::class, 'departmentAppeals'])->name('department-appeals');
         Route::get('/{status}', [AppealController::class, 'departmentStatusAppeals'])->name('department-status-appeals');
-        Route::get('/approve/{id}', [AppealController::class, 'approve'])->name('approve-appeal')->middleware(['auth', 'acl']);
+        Route::get('/approve/{id}', [AppealController::class, 'approve'])->name('approve-appeal');
     }
 );
 
@@ -98,13 +99,16 @@ Route::group(['prefix' => '/manager/appeals', 'middleware' => ['auth', 'acl'], '
     function () {
         Route::get('/', [AppealController::class, 'managerAppeals'])->name('manager-appeals');
         Route::get('/{status}', [AppealController::class, 'managerStatusAppeals'])->name('manager-status-appeals');
-        Route::get('/accept/{id}', [AppealController::class, 'accept'])->name('accept-appeal');
+        Route::post('/accept', [AppealController::class, 'managerProcessAppeal'])->name('manager-process-appeal');
     }
 );
 
 Route::get('/appeal/cancel/{id}', [AppealController::class, 'cancel'])->name('cancel-appeal')->middleware('auth');
 
 Route::get('/appeal/get/{id}', [AppealController::class, 'getAppealInBrowser'])->name('appeal-browser');
+
+Route::get('/stats', [StatsController::class, 'index'])->name('stats-index');
+Route::get('/statsJson', [StatsController::class, 'findAllJson'])->name('stats-json');
 
 Route::group(['prefix' => 'notification', 'middleware' => ['auth', 'acl'], 'is' => 'admin'],
     function () {

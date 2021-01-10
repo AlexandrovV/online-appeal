@@ -51,6 +51,9 @@
     <script src="{{asset('/js/adminlte.min.js')}}"></script>
     <!-- overlayScrollbars -->
     <script src="{{asset('/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=QCSg0uAXtICeOAITX8wsBKNmoJOtJF0ZB8rEiPLWbW70krrLlcq73WaCJux3-VocXUisTxFRJ4jwK5XMtmzBnSVhqE5LObEZHK2RLyUGGO2aNF9A9YTbXIYCXSvoEpug4CztBNX8Po1bdTtvGfU3tw" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+                                                                                                                                                                                                                                                                                                                            integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+                                                                                                                                                                                                                                                                                                                            crossorigin="anonymous"></script>
 </body>
 
 </html>

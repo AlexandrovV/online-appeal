@@ -21,6 +21,10 @@ class AppealRepository
         Log::info("Appeal added:", ['text' => $text]);
     }
 
+    public function findAll() {
+        return Appeal::all();
+    }
+
     public function studentsAppeals($studentId, $status)
     {
         if ($status != null) {

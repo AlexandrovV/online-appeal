@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <label for="text">Заявление</label>
-                    <input type="text" name="text" class="form-control" id="text"">
+                    <textarea name="text" class="form-control" id="text" rows="3"></textarea>
                 </div>
             </div>
 
